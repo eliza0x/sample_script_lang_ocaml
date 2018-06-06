@@ -3,6 +3,7 @@ PROGRAM = momen
 FILES[] =
    main
    lexer
+   parser
 
 # ocamlfind を使う場合
 USE_OCAMLFIND = true

@@ -1,0 +1,28 @@
+### https://raw.github.com/github/gitignore/f9a44f6c36d9fdd66a1aa9610f1331fdabf5e32c/OCaml.gitignore
+
+*.annot
+*.cmo
+*.cma
+*.cmi
+*.a
+*.o
+*.cmx
+*.cmxs
+*.cmxa
+
+# ocamlbuild working directory
+_build/
+
+# ocamlbuild targets
+*.byte
+*.native
+*.opt
+
+# oasis generated files
+setup.data
+setup.log
+
+# Merlin configuring file for Vim and Emacs
+.merlin
+
+.omakedb*
