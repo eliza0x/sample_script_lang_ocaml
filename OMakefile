@@ -1,0 +1,37 @@
+PROGRAM = momen
+
+FILES[] =
+   main
+   lexer
+
+# ocamlfind を使う場合
+USE_OCAMLFIND = true
+
+# ocamlfind で探して使うパッケージ
+OCAMLPACKS[] =
+	core
+	ppx_deriving.show
+
+OCAMLCFLAGS += -thread
+OCAMLOPTFLAGS += -thread
+
+# camlp4 プリプロセッサを使うことを omake に伝える
+# OCAMLFINDFLAGS = -syntax camlp4o
+
+# ocamldep を走らせる前にファイル生成しておく必要があることを OMake に伝える
+# (OMake は ocamllex と ocamlyacc を使うことは知っている)
+# OCamlGeneratedFiles(lexer.ml parser.mli parser.ml)
+
+# 実行ファイルの生成
+OCamlProgram($(PROGRAM), $(FILES))
+
+# デフォルト動作: バイトコードかネイティブコードのどちらか又は両方の生成
+# .DEFAULT: $(if $(BYTE_ENABLED), $(PROGRAM).run) \
+#           $(if $(NATIVE_ENABLED), $(PROGRAM).opt)
+.DEFAULT: $(if $(NATIVE_ENABLED), $(PROGRAM).opt)
+# 掃除
+.PHONY: clean
+clean:
+  rm -f \
+     $(filter-proper-targets $(glob $(addsuffix .*, $(FILES)))) \
+     $(PROGRAM).run $(PROGRAM).opt
